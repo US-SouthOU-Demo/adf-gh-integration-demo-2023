@@ -1,9 +1,0 @@
-{
-	"name": "df-dev-fredgohsman",
-	"location": "eastus",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "b50a5471-bd5a-4c08-a8b5-2e22151b3d75",
-		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
-	}
-}
