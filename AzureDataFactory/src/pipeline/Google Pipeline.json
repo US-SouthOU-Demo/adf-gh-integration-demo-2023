@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Ping Google",
+				"name": "Ping Microsoft",
 				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://google.com",
+					"url": "https://microsoft.com",
 					"method": "GET",
 					"headers": {
 						"User-Agent": "Awesome-GitHub-Demo"
