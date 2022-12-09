@@ -22,6 +22,7 @@ permissions:
   
 jobs:
   build:
+    name: Build ARM Template
     runs-on: ubuntu-latest
     environment: development
 
@@ -33,6 +34,7 @@ jobs:
         id: export
         uses: azure/data-factory-export-action@v1.1.0
         with:
+          path: ./AzureDataFactory/src
           id: /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.RESOURCE_GROUP_NAME }}/providers/Microsoft.DataFactory/factories/${{ secrets.DATA_FACTORY_NAME }}
         
       # Uploading our artifact from adf_publish branch
@@ -42,10 +44,12 @@ jobs:
           path: ${{ steps.export.outputs.arm-template-directory }}
           
   Dev_Deploy:
+    name: Deploy to Development
     runs-on: ubuntu-latest
     needs: build
     environment: development
-    steps:    
+
+    steps:
       # Downloading the artifact we uploaded earlier
       - name: Download a Build Artifact
         uses: actions/download-artifact@v3
@@ -70,11 +74,12 @@ jobs:
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
           
   QA_Deploy:
+    name: Deploy to QA
     runs-on: ubuntu-latest
     needs: build
     environment: qa
+
     steps:
-    
       # Downloading the artifact we uploaded earlier
       - name: Download a Build Artifact
         uses: actions/download-artifact@v3
@@ -99,9 +104,11 @@ jobs:
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
           
   PROD_Deploy:
+    name: Deploy to Production
     runs-on: ubuntu-latest
     needs: QA_Deploy
     environment: production
+    
     steps:    
       # Downloading the artifact we uploaded earlier
       - name: Download a Build Artifact
