@@ -32,7 +32,8 @@ jobs:
 
       - name: Export ARM Template
         id: export
-        uses: azure/data-factory-export-action@v1.1.0
+        #uses: azure/data-factory-export-action@v1.1.0
+        uses: fredgohsman/data-factory-export-action@main
         with:
           path: ./AzureDataFactory/src
           id: /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.RESOURCE_GROUP_NAME }}/providers/Microsoft.DataFactory/factories/${{ secrets.DATA_FACTORY_NAME }}
