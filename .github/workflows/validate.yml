@@ -25,4 +25,4 @@ jobs:
         uses: azure/data-factory-validate-action@v1.1.5
         with:
           id: ${{ env.dataFactoryId }}
-          path: ./DataFactory/src
+          path: ./AzureDataFactory/src
