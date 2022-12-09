@@ -6,6 +6,13 @@ on:
 
   workflow_dispatch:
 
+# Relies on the following secrets being configured in GitHub
+# - secrets.SUBSCRIPTION_ID
+# - secrets.RESOURCE_GROUP_NAME
+# - secrets.FACTORY_NAME
+env:
+  dataFactoryId: '/subscriptions/${{ secrets.SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.RESOURCE_GROUP_NAME }}/providers/Microsoft.DataFactory/factories/${{ secrets.FACTORY_NAME }}'
+
 jobs:
   PRValidate:
     runs-on: ubuntu-latest
@@ -17,4 +24,5 @@ jobs:
       - name: Validate Data Factory resources
         uses: azure/data-factory-validate-action@v1.1.5
         with:
-          id: ${{ secrets.ADFDevResourceID }}
+          id: ${{ env.dataFactoryId }}
+          path: ./DataFactory/src
