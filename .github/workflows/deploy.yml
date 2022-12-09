@@ -19,7 +19,10 @@ on:
 permissions:
       id-token: write
       contents: read
-  
+
+concurrency:
+  group: ${{ github.workflow }}
+
 jobs:
   build:
     name: Build ARM Template
@@ -69,7 +72,8 @@ jobs:
           
       # Deploying to UAT environment
       - name: Deploy resources to Dev
-        uses: Azure/data-factory-deploy-action@v1.2.0
+        #uses: Azure/data-factory-deploy-action@v1.2.0
+        uses: fredgohsman/data-factory-deploy-action@main
         with:
           resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
@@ -99,7 +103,8 @@ jobs:
           
       # Deploying to QA environment
       - name: Deploy resources to QA
-        uses: Azure/data-factory-deploy-action@v1.2.0
+        #uses: Azure/data-factory-deploy-action@v1.2.0
+        uses: fredgohsman/data-factory-deploy-action@main
         with:
           resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
@@ -129,7 +134,8 @@ jobs:
           
       # Deploying to Production environment
       - name: Deploy resources to Production
-        uses: Azure/data-factory-deploy-action@v1.2.0
+        #uses: Azure/data-factory-deploy-action@v1.2.0
+        uses: fredgohsman/data-factory-deploy-action@main
         with:
           resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
