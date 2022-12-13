@@ -9,9 +9,9 @@ on:
 # Relies on the following secrets being configured in GitHub
 # - secrets.AZURE_SUBSCRIPTION_ID
 # - secrets.RESOURCE_GROUP_NAME
-# - secrets.FACTORY_NAME
+# - secrets.DATA_FACTORY_NAME
 env:
-  dataFactoryId: '/subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.RESOURCE_GROUP_NAME }}/providers/Microsoft.DataFactory/factories/${{ secrets.FACTORY_NAME }}'
+  dataFactoryId: '/subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.RESOURCE_GROUP_NAME }}/providers/Microsoft.DataFactory/factories/${{ secrets.DATA_FACTORY_NAME }}'
 
 jobs:
   PRValidate:
