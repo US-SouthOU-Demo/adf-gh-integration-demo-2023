@@ -50,4 +50,5 @@ GitHub Actions workflows to perform the deployments.
 8. Repeat steps 1-7 for each environment, branch, tag as appropriate
 
 [Previous: Connect Azure DataFactory to a GitHub repository](./01-connect-adf-github.md)
+
 [Next: Assign permissions to the App Registration](./03-assign-permissions-to-app-registration.md)
