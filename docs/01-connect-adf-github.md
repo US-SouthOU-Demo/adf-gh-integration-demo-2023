@@ -35,3 +35,5 @@ how to configure your Azure DataFactory to an existing GitHub repository.
 22. The slide out panel will be updated to **Set working branch**
 23. In the **Working branch** dropdown, select **main** or another branch that you would like to use to store the code
 24. Click the **Save** button
+
+[Next: Configure the Azure App Registration](./02-configure-app-registration.md)
