@@ -38,4 +38,6 @@
 6. In the **Value** textbox, enter the value of for the secret
    - Note that once you save the value of the secret, you will not be able to see that value in GitHub again
 
-[Previous: Assign permissions to the App Registration](./03-assign-permissions-to-app-registration.md)
+Previous|
+---|
+[Assign permissions to the App Registration](./03-assign-permissions-to-app-registration.md)|
