@@ -21,3 +21,6 @@ Azure to allow the App registration access to the subscription
 14. Click the **Select** button
 15. Click the **Review + assign** button
 16. Click the **Review + assign** button again
+
+[Previous: Configure the Azure App Registration](./02-configure-app-registration.md)
+[Next: Configure GitHub Environments and Secrets](./04-configure-github-environments-secrets.md)
