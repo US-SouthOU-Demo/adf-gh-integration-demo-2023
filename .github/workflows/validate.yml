@@ -11,10 +11,7 @@ on:
 # - secrets.RESOURCE_GROUP_NAME
 # - secrets.DATA_FACTORY_NAME
 env:
-  subscriptionId: c6b181c1-c585-4048-8a67-ebc99188d823
-  resourceGroupName: rg-adf-development
-  dataFactoryName: rg-adf-development
-  dataFactoryId: '/subscriptions/${{ env.subscriptionId }}/resourceGroups/${{ env.resourceGroupName }}/providers/Microsoft.DataFactory/factories/${{ env.dataFactoryName }}'
+  dataFactoryId: '/subscriptions/c6b181c1-c585-4048-8a67-ebc99188d823/resourceGroups/rg-adf-development/providers/Microsoft.DataFactory/factories/adf-fredgohsman-development'
   # dataFactoryId: '/subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.RESOURCE_GROUP_NAME }}/providers/Microsoft.DataFactory/factories/${{ secrets.DATA_FACTORY_NAME }}'
 
 jobs:
