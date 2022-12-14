@@ -9,5 +9,5 @@ Several steps are required to create a CI/CD workflow in a GitHub repository tha
 
 References
 ---
-[Automated publishing for continuous integration and delivery](https://learn.microsoft.com/en-us/azure/data-factory/continuous-integration-delivery-improvements)
-[Source control in Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/source-control#github-organizations)
+- [Automated publishing for continuous integration and delivery](https://learn.microsoft.com/en-us/azure/data-factory/continuous-integration-delivery-improvements)
+- [Source control in Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/source-control#github-organizations)
