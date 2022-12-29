@@ -81,7 +81,7 @@ jobs:
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
           armTemplateFile: ./linkedTemplates/ArmTemplate_master.json
           armTemplateParametersFile: ./linkedTemplates/ArmTemplateParameters_master.json
-          additionalParameters: containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}
+          additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
           
   QA_Deploy:
     name: Deploy to QA
@@ -115,7 +115,7 @@ jobs:
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
           armTemplateFile: ./linkedTemplates/ArmTemplate_master.json
           armTemplateParametersFile: ./linkedTemplates/ArmTemplateParameters_master.json
-          additionalParameters: containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}
+          additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
           
   PROD_Deploy:
     name: Deploy to Production
@@ -149,4 +149,4 @@ jobs:
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
           armTemplateFile: ./linkedTemplates/ArmTemplate_master.json
           armTemplateParametersFile: ./linkedTemplates/ArmTemplateParameters_master.json
-          additionalParameters: containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}
+          additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
