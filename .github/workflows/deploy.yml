@@ -24,9 +24,7 @@ concurrency:
   group: ${{ github.workflow }}
 
 env:
-  containerURI: 'https://saesripoc.blob.core.windows.net/public'
-  resourceGroup: rg-adf-development
-  dataFactory: adf-fredgohsman-development
+  containerURI: 'https://saesripoc.blob.core.windows.net/private'
 
 jobs:
   build:
@@ -78,14 +76,11 @@ jobs:
       - name: Deploy resources to Dev
         uses: azure/data-factory-deploy-action@v1.2.0
         with:
-          #resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
           resourceGroupName: ${{ env.resourceGroup }}
-          #dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
           dataFactoryName: ${{ env.dataFactory }}
           armTemplateFile: linkedTemplates/ArmTemplate_master.json
           armTemplateParametersFile: linkedTemplates/ArmTemplateParameters_master.json
-          #additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
-          additionalParameters: containerUri=${{ env.containerURI }}
+          additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
           
   # QA_Deploy:
   #   name: Deploy to QA
