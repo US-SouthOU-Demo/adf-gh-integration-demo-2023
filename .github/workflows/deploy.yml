@@ -24,7 +24,7 @@ concurrency:
   group: ${{ github.workflow }}
 
 env:
-  containerURI: 'https://saesripoc.blob.core.windows.net/private'
+  containerURI: 'https://saesripoc.blob.core.windows.net/public'
 
 jobs:
   build:
