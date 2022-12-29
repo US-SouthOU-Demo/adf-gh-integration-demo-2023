@@ -76,8 +76,7 @@ jobs:
           
       # Deploying to UAT environment
       - name: Deploy resources to Dev
-        #uses: azure/data-factory-deploy-action@v1.2.0
-        uses: fredgohsman/data-factory-deploy-action@debug
+        uses: azure/data-factory-deploy-action@v1.2.0
         with:
           #resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
           resourceGroupName: ${{ env.resourceGroup }}
