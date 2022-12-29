@@ -76,8 +76,8 @@ jobs:
       - name: Deploy resources to Dev
         uses: azure/data-factory-deploy-action@v1.2.0
         with:
-          resourceGroupName: ${{ env.resourceGroup }}
-          dataFactoryName: ${{ env.dataFactory }}
+          resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
+          dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
           armTemplateFile: linkedTemplates/ArmTemplate_master.json
           armTemplateParametersFile: linkedTemplates/ArmTemplateParameters_master.json
           additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
