@@ -23,6 +23,9 @@ permissions:
 concurrency:
   group: ${{ github.workflow }}
 
+env:
+  containerURI: 'https://saesripoc.blob.core.windows.net/private'
+
 jobs:
   build:
     name: Build ARM Template
@@ -35,8 +38,7 @@ jobs:
 
       - name: Export ARM Template
         id: export
-        #uses: azure/data-factory-export-action@v1.1.0
-        uses: fredgohsman/data-factory-export-action@main
+        uses: azure/data-factory-export-action@v1.2.0
         with:
           path: ./AzureDataFactory/src
           id: /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.RESOURCE_GROUP_NAME }}/providers/Microsoft.DataFactory/factories/${{ secrets.DATA_FACTORY_NAME }}
@@ -77,6 +79,8 @@ jobs:
         with:
           resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
+          armTemplateFile: ./linkedTemplates/ArmTemplate_master.json
+          additionalParameters: containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}
           
   QA_Deploy:
     name: Deploy to QA
@@ -108,6 +112,8 @@ jobs:
         with:
           resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
+          armTemplateFile: ./linkedTemplates/ArmTemplate_master.json
+          additionalParameters: containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}
           
   PROD_Deploy:
     name: Deploy to Production
@@ -139,3 +145,5 @@ jobs:
         with:
           resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
           dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
+          armTemplateFile: ./linkedTemplates/ArmTemplate_master.json
+          additionalParameters: containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}
