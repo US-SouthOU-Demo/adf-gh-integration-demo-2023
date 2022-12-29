@@ -25,6 +25,8 @@ concurrency:
 
 env:
   containerURI: 'https://saesripoc.blob.core.windows.net/public'
+  resourceGroup: rg-adf-development
+  dataFactory: adf-fredgohsman-development
 
 jobs:
   build:
@@ -77,76 +79,79 @@ jobs:
         #uses: Azure/data-factory-deploy-action@v1.2.0
         uses: fredgohsman/data-factory-deploy-action@main
         with:
-          resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
-          dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
+          #resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
+          resourceGroupName: ${{ env.resourceGroup }}
+          #dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
+          dataFactoryName: ${{ env.dataFactory }}
           armTemplateFile: linkedTemplates/ArmTemplate_master.json
           armTemplateParametersFile: linkedTemplates/ArmTemplateParameters_master.json
-          additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
+          #additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
+          additionalParameters: containerUri=${{ env.containerURI }}
           
-  QA_Deploy:
-    name: Deploy to QA
-    runs-on: ubuntu-latest
-    needs: build
-    environment: qa
+  # QA_Deploy:
+  #   name: Deploy to QA
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   environment: qa
 
-    steps:
-      # Downloading the artifact we uploaded earlier
-      - name: Download a Build Artifact
-        uses: actions/download-artifact@v3
-        with:
-          # Artifact name
-          name: adf-artifact
+  #   steps:
+  #     # Downloading the artifact we uploaded earlier
+  #     - name: Download a Build Artifact
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         # Artifact name
+  #         name: adf-artifact
 
-      # Logging in to Azure with OIDC
-      - name: 'Az CLI login'
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          enable-AzPSSession: true 
+  #     # Logging in to Azure with OIDC
+  #     - name: 'Az CLI login'
+  #       uses: azure/login@v1
+  #       with:
+  #         client-id: ${{ secrets.AZURE_CLIENT_ID }}
+  #         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+  #         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  #         enable-AzPSSession: true 
           
-      # Deploying to QA environment
-      - name: Deploy resources to QA
-        #uses: Azure/data-factory-deploy-action@v1.2.0
-        uses: fredgohsman/data-factory-deploy-action@main
-        with:
-          resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
-          dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
-          armTemplateFile: linkedTemplates/ArmTemplate_master.json
-          armTemplateParametersFile: linkedTemplates/ArmTemplateParameters_master.json
-          additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
+  #     # Deploying to QA environment
+  #     - name: Deploy resources to QA
+  #       #uses: Azure/data-factory-deploy-action@v1.2.0
+  #       uses: fredgohsman/data-factory-deploy-action@main
+  #       with:
+  #         resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
+  #         dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
+  #         armTemplateFile: linkedTemplates/ArmTemplate_master.json
+  #         armTemplateParametersFile: linkedTemplates/ArmTemplateParameters_master.json
+  #         additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
           
-  PROD_Deploy:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: QA_Deploy
-    environment: production
+  # PROD_Deploy:
+  #   name: Deploy to Production
+  #   runs-on: ubuntu-latest
+  #   needs: QA_Deploy
+  #   environment: production
     
-    steps:    
-      # Downloading the artifact we uploaded earlier
-      - name: Download a Build Artifact
-        uses: actions/download-artifact@v3
-        with:
-          # Artifact name
-          name: adf-artifact
+  #   steps:    
+  #     # Downloading the artifact we uploaded earlier
+  #     - name: Download a Build Artifact
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         # Artifact name
+  #         name: adf-artifact
 
-      # Logging in to Azure with OIDC
-      - name: 'Az CLI login'
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          enable-AzPSSession: true 
+  #     # Logging in to Azure with OIDC
+  #     - name: 'Az CLI login'
+  #       uses: azure/login@v1
+  #       with:
+  #         client-id: ${{ secrets.AZURE_CLIENT_ID }}
+  #         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+  #         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  #         enable-AzPSSession: true 
           
-      # Deploying to Production environment
-      - name: Deploy resources to Production
-        #uses: Azure/data-factory-deploy-action@v1.2.0
-        uses: fredgohsman/data-factory-deploy-action@main
-        with:
-          resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
-          dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
-          armTemplateFile: linkedTemplates/ArmTemplate_master.json
-          armTemplateParametersFile: linkedTemplates/ArmTemplateParameters_master.json
-          additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
+  #     # Deploying to Production environment
+  #     - name: Deploy resources to Production
+  #       #uses: Azure/data-factory-deploy-action@v1.2.0
+  #       uses: fredgohsman/data-factory-deploy-action@main
+  #       with:
+  #         resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
+  #         dataFactoryName: ${{ secrets.DATA_FACTORY_NAME }}
+  #         armTemplateFile: linkedTemplates/ArmTemplate_master.json
+  #         armTemplateParametersFile: linkedTemplates/ArmTemplateParameters_master.json
+  #         additionalParameters: 'containerUri=${{ env.containerURI }} containerSasToken=${{ secrets.STORAGE_ACCOUNT_TOKEN }}'
